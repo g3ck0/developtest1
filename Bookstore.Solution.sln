@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.Solution", "Bookstore.Solution\Bookstore.Solution.csproj", "{E491C5B5-5849-4BC7-AF0D-793E197D7C06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.DAL", "Bookstore.DAL\Bookstore.DAL.csproj", "{80DDEF69-B76C-4695-B4D8-A2A923105FD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E491C5B5-5849-4BC7-AF0D-793E197D7C06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E491C5B5-5849-4BC7-AF0D-793E197D7C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E491C5B5-5849-4BC7-AF0D-793E197D7C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E491C5B5-5849-4BC7-AF0D-793E197D7C06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80DDEF69-B76C-4695-B4D8-A2A923105FD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80DDEF69-B76C-4695-B4D8-A2A923105FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80DDEF69-B76C-4695-B4D8-A2A923105FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80DDEF69-B76C-4695-B4D8-A2A923105FD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

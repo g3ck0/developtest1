@@ -1,0 +1,44 @@
+﻿@model Bookstore.Solution.Models.BookModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>BookModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+    <table>
+        <caption>Authors:</caption>
+        @foreach (var items in ViewBag.Authors)
+        {
+            <tr>
+                <td>@Html.Raw(items)</td>
+            </tr>
+        }
+    </table>
+    <table>
+        <caption>Categories:</caption>
+        @foreach (var items in ViewBag.Categories)
+        {
+            <tr>
+                <td>@Html.Raw(items)</td>
+            </tr>
+        }
+        
+    </table>
+        
+        
+
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
