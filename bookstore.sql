@@ -1,0 +1,169 @@
+USE [master]
+GO
+/****** Object:  Database [bookstore]    Script Date: 12/28/2015 13:28:28 ******/
+CREATE DATABASE [bookstore] ON  PRIMARY 
+( NAME = N'bookstore', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\bookstore.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'bookstore_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.SQLEXPRESS\MSSQL\DATA\bookstore_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [bookstore] SET COMPATIBILITY_LEVEL = 100
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [bookstore].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [bookstore] SET ANSI_NULL_DEFAULT OFF
+GO
+ALTER DATABASE [bookstore] SET ANSI_NULLS OFF
+GO
+ALTER DATABASE [bookstore] SET ANSI_PADDING OFF
+GO
+ALTER DATABASE [bookstore] SET ANSI_WARNINGS OFF
+GO
+ALTER DATABASE [bookstore] SET ARITHABORT OFF
+GO
+ALTER DATABASE [bookstore] SET AUTO_CLOSE OFF
+GO
+ALTER DATABASE [bookstore] SET AUTO_CREATE_STATISTICS ON
+GO
+ALTER DATABASE [bookstore] SET AUTO_SHRINK OFF
+GO
+ALTER DATABASE [bookstore] SET AUTO_UPDATE_STATISTICS ON
+GO
+ALTER DATABASE [bookstore] SET CURSOR_CLOSE_ON_COMMIT OFF
+GO
+ALTER DATABASE [bookstore] SET CURSOR_DEFAULT  GLOBAL
+GO
+ALTER DATABASE [bookstore] SET CONCAT_NULL_YIELDS_NULL OFF
+GO
+ALTER DATABASE [bookstore] SET NUMERIC_ROUNDABORT OFF
+GO
+ALTER DATABASE [bookstore] SET QUOTED_IDENTIFIER OFF
+GO
+ALTER DATABASE [bookstore] SET RECURSIVE_TRIGGERS OFF
+GO
+ALTER DATABASE [bookstore] SET  DISABLE_BROKER
+GO
+ALTER DATABASE [bookstore] SET AUTO_UPDATE_STATISTICS_ASYNC OFF
+GO
+ALTER DATABASE [bookstore] SET DATE_CORRELATION_OPTIMIZATION OFF
+GO
+ALTER DATABASE [bookstore] SET TRUSTWORTHY OFF
+GO
+ALTER DATABASE [bookstore] SET ALLOW_SNAPSHOT_ISOLATION OFF
+GO
+ALTER DATABASE [bookstore] SET PARAMETERIZATION SIMPLE
+GO
+ALTER DATABASE [bookstore] SET READ_COMMITTED_SNAPSHOT OFF
+GO
+ALTER DATABASE [bookstore] SET HONOR_BROKER_PRIORITY OFF
+GO
+ALTER DATABASE [bookstore] SET  READ_WRITE
+GO
+ALTER DATABASE [bookstore] SET RECOVERY SIMPLE
+GO
+ALTER DATABASE [bookstore] SET  MULTI_USER
+GO
+ALTER DATABASE [bookstore] SET PAGE_VERIFY CHECKSUM
+GO
+ALTER DATABASE [bookstore] SET DB_CHAINING OFF
+GO
+USE [bookstore]
+GO
+/****** Object:  Table [dbo].[Authors]    Script Date: 12/28/2015 13:28:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Authors](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Author] [nvarchar](255) NOT NULL,
+ CONSTRAINT [PK_Authors] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Categories]    Script Date: 12/28/2015 13:28:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Categories](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Category] [nvarchar](255) NOT NULL,
+ CONSTRAINT [PK_Categories] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Books]    Script Date: 12/28/2015 13:28:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Books](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](255) NOT NULL,
+ CONSTRAINT [PK_Books] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[BookCategory]    Script Date: 12/28/2015 13:28:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BookCategory](
+	[BookId] [int] NOT NULL,
+	[CategoryId] [int] NOT NULL,
+ CONSTRAINT [PK_BookCategory] PRIMARY KEY CLUSTERED 
+(
+	[BookId] ASC,
+	[CategoryId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[BookAuthor]    Script Date: 12/28/2015 13:28:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BookAuthor](
+	[BookId] [int] NOT NULL,
+	[AuthorId] [int] NOT NULL,
+ CONSTRAINT [PK_BookAuthor] PRIMARY KEY CLUSTERED 
+(
+	[BookId] ASC,
+	[AuthorId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  ForeignKey [FK_BookCategory_Books]    Script Date: 12/28/2015 13:28:29 ******/
+ALTER TABLE [dbo].[BookCategory]  WITH CHECK ADD  CONSTRAINT [FK_BookCategory_Books] FOREIGN KEY([BookId])
+REFERENCES [dbo].[Books] ([Id])
+GO
+ALTER TABLE [dbo].[BookCategory] CHECK CONSTRAINT [FK_BookCategory_Books]
+GO
+/****** Object:  ForeignKey [FK_BookCategory_Categories]    Script Date: 12/28/2015 13:28:29 ******/
+ALTER TABLE [dbo].[BookCategory]  WITH CHECK ADD  CONSTRAINT [FK_BookCategory_Categories] FOREIGN KEY([CategoryId])
+REFERENCES [dbo].[Categories] ([Id])
+GO
+ALTER TABLE [dbo].[BookCategory] CHECK CONSTRAINT [FK_BookCategory_Categories]
+GO
+/****** Object:  ForeignKey [FK_BookAuthor_Authors]    Script Date: 12/28/2015 13:28:29 ******/
+ALTER TABLE [dbo].[BookAuthor]  WITH CHECK ADD  CONSTRAINT [FK_BookAuthor_Authors] FOREIGN KEY([AuthorId])
+REFERENCES [dbo].[Authors] ([Id])
+GO
+ALTER TABLE [dbo].[BookAuthor] CHECK CONSTRAINT [FK_BookAuthor_Authors]
+GO
+/****** Object:  ForeignKey [FK_BookAuthor_Books]    Script Date: 12/28/2015 13:28:29 ******/
+ALTER TABLE [dbo].[BookAuthor]  WITH CHECK ADD  CONSTRAINT [FK_BookAuthor_Books] FOREIGN KEY([BookId])
+REFERENCES [dbo].[Books] ([Id])
+GO
+ALTER TABLE [dbo].[BookAuthor] CHECK CONSTRAINT [FK_BookAuthor_Books]
+GO
